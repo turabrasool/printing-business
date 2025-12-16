@@ -13,7 +13,7 @@ import {
   BookOpen, FileCheck, Cpu, Smartphone, Monitor,
   PrinterIcon as PrintIcon, Scissors, Thermometer,
   Droplets, Grid, Hash, Type, Image as ImageIcon,
-  Bookmark, Share2, Heart, ArrowRight
+  Bookmark, Share2, Heart, ArrowRight, X
 } from "lucide-react"
 import { useTheme } from "@/app/theme-provider"
 
@@ -21,254 +21,213 @@ export default function ServicesPage() {
   const { theme } = useTheme()
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
+    const [selectedService, setSelectedService] = useState(null) // Add this
+  const [isModalOpen, setIsModalOpen] = useState(false) // Add this
+
 
   // Main Service Categories
   const serviceCategories = [
-    { id: "all", name: "All Services", icon: Grid, count: 18, color: "bg-blue-500" },
-    { id: "business", name: "Business Printing", icon: FileText, count: 6, color: "bg-green-500" },
-    { id: "packaging", name: "Packaging", icon: Package, count: 4, color: "bg-yellow-500" },
-    { id: "labels", name: "Labels & Stickers", icon: Tag, count: 3, color: "bg-pink-500" },
-    { id: "large-format", name: "Large Format", icon: Square, count: 3, color: "bg-purple-500" },
-    { id: "specialty", name: "Specialty Printing", icon: Layers, count: 2, color: "bg-red-500" },
-  ]
+  { id: "all", name: "All Services", icon: Grid, count: 21, color: "bg-blue-500" },
+  { id: "garment", name: "Garment Accessories", icon: Tag, count: 4, color: "bg-purple-500" }, // New category
+  { id: "business", name: "Business Printing", icon: FileText, count: 5, color: "bg-green-500" },
+  { id: "packaging", name: "Packaging", icon: Package, count: 2, color: "bg-yellow-500" },
+  { id: "labels", name: "Labels & Stickers", icon: Tag, count: 2, color: "bg-pink-500" },
+  { id: "large-format", name: "Large Format", icon: Square, count: 3, color: "bg-purple-500" },
+  { id: "specialty", name: "Specialty Printing", icon: Layers, count: 5, color: "bg-red-500" },
+]
 
   // Detailed Services Data
   const detailedServices = [
-    {
-      id: 1,
-      title: "Business Cards",
-      category: "business",
-      icon: FileText,
-      description: "Premium business cards that make a lasting impression",
-      features: ["Multiple paper stocks", "Spot UV coating", "Foil stamping", "Die cutting", "Embossing"],
-      turnaround: "3-5 business days",
-      minQuantity: 100,
-      popular: true,
-      price: "₨ 2,500+",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      id: 2,
-      title: "Brochures & Flyers",
-      category: "business",
-      icon: BookOpen,
-      description: "Effective marketing materials for your business",
-      features: ["Full color printing", "Various folds", "Gloss/matte finish", "Multiple sizes", "Bulk discounts"],
-      turnaround: "4-7 business days",
-      minQuantity: 500,
-      popular: true,
-      price: "₨ 5,000+",
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      id: 3,
-      title: "Letterheads & Envelopes",
-      category: "business",
-      icon: FileCheck,
-      description: "Professional corporate stationery sets",
-      features: ["Custom watermarks", "Embossed logos", "Premium paper", "Matching envelopes", "Brand consistency"],
-      turnaround: "5-8 business days",
-      minQuantity: 500,
-      popular: false,
-      price: "₨ 8,000+",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      id: 4,
-      title: "Presentation Folders",
-      category: "business",
-      icon: Folder,
-      description: "Custom folders for meetings and presentations",
-      features: ["Pocket folders", "Business card slots", "Custom printing", "Various materials", "Logo embossing"],
-      turnaround: "7-10 business days",
-      minQuantity: 100,
-      popular: false,
-      price: "₨ 12,000+",
-      color: "from-orange-500 to-red-500"
-    },
-    {
-      id: 5,
-      title: "Catalogs & Booklets",
-      category: "business",
-      icon: BookOpen,
-      description: "Professional catalogs for product showcasing",
-      features: ["Perfect binding", "Saddle stitching", "High gloss pages", "Custom covers", "Bulk printing"],
-      turnaround: "10-14 business days",
-      minQuantity: 200,
-      popular: false,
-      price: "₨ 15,000+",
-      color: "from-teal-500 to-blue-500"
-    },
-    {
-      id: 6,
-      title: "Product Packaging",
-      category: "packaging",
-      icon: Package,
-      description: "Custom packaging solutions for your products",
-      features: ["Box printing", "Die-cut windows", "Eco-friendly materials", "Branded packaging", "Protective coating"],
-      turnaround: "10-15 business days",
-      minQuantity: 500,
-      popular: true,
-      price: "₨ 20,000+",
-      color: "from-yellow-500 to-orange-500"
-    },
-    {
-      id: 7,
-      title: "Retail Bags",
-      category: "packaging",
-      icon: Package,
-      description: "Branded shopping bags for retail businesses",
-      features: ["Multiple sizes", "Reinforced handles", "Eco-friendly options", "Vibrant printing", "Custom shapes"],
-      turnaround: "7-12 business days",
-      minQuantity: 1000,
-      popular: false,
-      price: "₨ 8,000+",
-      color: "from-pink-500 to-rose-500"
-    },
-    {
-      id: 8,
-      title: "Labels & Stickers",
-      category: "labels",
-      icon: Tag,
-      description: "Custom labels for products and branding",
-      features: ["Vinyl stickers", "Waterproof labels", "Die-cut shapes", "Kiss-cutting", "Bulk rolls"],
-      turnaround: "3-7 business days",
-      minQuantity: 1000,
-      popular: true,
-      price: "₨ 3,000+",
-      color: "from-indigo-500 to-purple-500"
-    },
-    {
-      id: 9,
-      title: "Barcode Labels",
-      category: "labels",
-      icon: Hash,
-      description: "Professional barcode labels for inventory",
-      features: ["QR codes", "Barcode printing", "Sequential numbering", "Thermal printing", "Scan-ready"],
-      turnaround: "2-5 business days",
-      minQuantity: 5000,
-      popular: false,
-      price: "₨ 5,000+",
-      color: "from-gray-500 to-slate-500"
-    },
-    {
-      id: 10,
-      title: "Vehicle Wraps",
-      category: "large-format",
-      icon: Truck,
-      description: "Full or partial vehicle wraps for advertising",
-      features: ["Full vehicle wraps", "Window graphics", "3M materials", "Professional installation", "Weather resistant"],
-      turnaround: "7-14 business days",
-      minQuantity: 1,
-      popular: true,
-      price: "₨ 50,000+",
-      color: "from-red-500 to-orange-500"
-    },
-    {
-      id: 11,
-      title: "Banners & Signage",
-      category: "large-format",
-      icon: Square,
-      description: "Large format printing for indoor/outdoor use",
-      features: ["Vinyl banners", "Fabric banners", "Retractable stands", "Outdoor durability", "Grommet installation"],
-      turnaround: "3-7 business days",
-      minQuantity: 1,
-      popular: true,
-      price: "₨ 3,000+",
-      color: "from-blue-500 to-indigo-500"
-    },
-    {
-      id: 12,
-      title: "Window Decals",
-      category: "large-format",
-      icon: Square,
-      description: "Custom window graphics for storefronts",
-      features: ["Perforated vinyl", "Frosted effects", "Full color printing", "Easy application", "Removable options"],
-      turnaround: "4-8 business days",
-      minQuantity: 1,
-      popular: false,
-      price: "₨ 4,000+",
-      color: "from-green-500 to-teal-500"
-    },
-    {
-      id: 13,
-      title: "Leather Patches",
-      category: "specialty",
-      icon: Layers,
-      description: "Custom leather patches for garments",
-      features: ["Genuine leather", "Embossing/debossing", "Foil stamping", "Various colors", "Custom shapes"],
-      turnaround: "10-15 business days",
-      minQuantity: 100,
-      popular: true,
-      price: "₨ 15,000+",
-      color: "from-amber-500 to-yellow-500"
-    },
-    {
-      id: 14,
-      title: "Foam Board Printing",
-      category: "specialty",
-      icon: Layers,
-      description: "Lightweight display boards for exhibitions",
-      features: ["Various thicknesses", "Mounting options", "High gloss finish", "Easy to transport", "Custom sizes"],
-      turnaround: "4-8 business days",
-      minQuantity: 1,
-      popular: false,
-      price: "₨ 2,000+",
-      color: "from-purple-500 to-violet-500"
-    },
-    {
-      id: 15,
-      title: "Digital Printing",
-      category: "all",
-      icon: Cpu,
-      description: "High-quality digital printing for short runs",
-      features: ["Quick turnaround", "Variable data", "Photo quality", "Small quantities", "Fast proofs"],
-      turnaround: "1-3 business days",
-      minQuantity: 1,
-      popular: true,
-      price: "₨ 1,000+",
-      color: "from-sky-500 to-blue-500"
-    },
-    {
-      id: 16,
-      title: "Offset Printing",
-      category: "all",
-      icon: Printer,
-      description: "Cost-effective printing for large quantities",
-      features: ["Best for bulk", "Color consistency", "Multiple paper types", "Custom inks", "Cost-effective"],
-      turnaround: "7-14 business days",
-      minQuantity: 1000,
-      popular: true,
-      price: "₨ 10,000+",
-      color: "from-emerald-500 to-green-500"
-    },
-    {
-      id: 17,
-      title: "Screen Printing",
-      category: "specialty",
-      icon: Grid,
-      description: "Vibrant printing on various materials",
-      features: ["Textile printing", "Plastic printing", "Metal printing", "Vibrant colors", "Durable prints"],
-      turnaround: "5-10 business days",
-      minQuantity: 50,
-      popular: false,
-      price: "₨ 8,000+",
-      color: "from-rose-500 to-pink-500"
-    },
-    {
-      id: 18,
-      title: "Foil Stamping",
-      category: "specialty",
-      icon: Star,
-      description: "Luxury metallic finishes for premium products",
-      features: ["Gold/Silver foil", "Holographic options", "Custom patterns", "Precision registration", "Luxury finish"],
-      turnaround: "5-10 business days",
-      minQuantity: 500,
-      popular: true,
-      price: "₨ 12,000+",
-      color: "from-yellow-500 to-amber-500"
-    },
-  ]
+  {
+    id: 1,
+    title: "Garment Accessories",
+    category: "garment",
+    icon: Tag, // Using Tag icon for garment accessories
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
+    description: "Custom labels, tags, and accessories for clothing and textiles",
+    color: "from-purple-500 to-pink-500"
+  },
+  {
+    id: 2,
+    title: "Business Cards",
+    category: "business",
+    icon: FileText,
+    image: "https://images.unsplash.com/photo-1601933470096-0e34634ffcde?w=400&h=300&fit=crop",
+    description: "Premium business cards that make a lasting impression",
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    id: 3,
+    title: "Brochures & Flyers",
+    category: "business",
+    icon: BookOpen,
+    image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=400&h=300&fit=crop",
+    description: "Effective marketing materials for your business",
+    color: "from-green-500 to-emerald-500"
+  },
+  {
+    id: 4,
+    title: "Letterheads & Envelopes",
+    category: "business",
+    icon: FileCheck,
+    image: "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?w=400&h=300&fit=crop",
+    description: "Professional corporate stationery sets",
+    color: "from-teal-500 to-blue-500"
+  },
+  {
+    id: 5,
+    title: "Presentation Folders",
+    category: "business",
+    icon: Folder,
+    image: "https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?w=400&h=300&fit=crop",
+    description: "Custom folders for meetings and presentations",
+    color: "from-orange-500 to-red-500"
+  },
+  {
+    id: 6,
+    title: "Catalogs & Booklets",
+    category: "business",
+    icon: BookOpen,
+    image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400&h=300&fit=crop",
+    description: "Professional catalogs for product showcasing",
+    color: "from-indigo-500 to-purple-500"
+  },
+  {
+    id: 7,
+    title: "Product Packaging",
+    category: "packaging",
+    icon: Package,
+    image: "https://images.unsplash.com/photo-1581235720708-508d4b033c4d?w=400&h=300&fit=crop",
+    description: "Custom packaging solutions for your products",
+    color: "from-yellow-500 to-orange-500"
+  },
+  {
+    id: 8,
+    title: "Retail Bags",
+    category: "packaging",
+    icon: Package,
+    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=300&fit=crop",
+    description: "Branded shopping bags for retail businesses",
+    color: "from-pink-500 to-rose-500"
+  },
+  {
+    id: 9,
+    title: "Labels & Stickers",
+    category: "labels",
+    icon: Tag,
+    image: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&h=300&fit=crop",
+    description: "Custom labels for products and branding",
+    color: "from-red-500 to-orange-500"
+  },
+  {
+    id: 10,
+    title: "Barcode Labels",
+    category: "labels",
+    icon: Hash,
+    image: "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=400&h=300&fit=crop",
+    description: "Professional barcode labels for inventory",
+    color: "from-gray-500 to-slate-500"
+  },
+  {
+    id: 11,
+    title: "Vehicle Wraps",
+    category: "large-format",
+    icon: Truck,
+    image: "https://images.unsplash.com/photo-1563720223487-62e5e6cda3dc?w=400&h=300&fit=crop",
+    description: "Full or partial vehicle wraps for advertising",
+    color: "from-blue-500 to-indigo-500"
+  },
+  {
+    id: 12,
+    title: "Banners & Signage",
+    category: "large-format",
+    icon: Square,
+    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop",
+    description: "Large format printing for indoor/outdoor use",
+    color: "from-green-500 to-teal-500"
+  },
+  {
+    id: 13,
+    title: "Window Decals",
+    category: "large-format",
+    icon: Square,
+    image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=400&h=300&fit=crop",
+    description: "Custom window graphics for storefronts",
+    color: "from-amber-500 to-yellow-500"
+  },
+  {
+    id: 14,
+    title: "Leather Patches",
+    category: "garment", // Changed category to garment
+    icon: Layers,
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
+    description: "Custom leather patches for garments",
+    color: "from-purple-500 to-violet-500"
+  },
+  {
+    id: 15,
+    title: "Woven Labels",
+    category: "garment",
+    icon: Grid,
+    image: "https://images.unsplash.com/photo-1558769132-cb1f8d3c5fdd?w=400&h=300&fit=crop",
+    description: "Premium woven labels for clothing brands",
+    color: "from-red-500 to-pink-500"
+  },
+  {
+    id: 16,
+    title: "Hang Tags",
+    category: "garment",
+    icon: Tag,
+    image: "https://images.unsplash.com/photo-1580637250481-b78db3e6f84d?w=400&h=300&fit=crop",
+    description: "Custom hang tags for clothing and accessories",
+    color: "from-blue-500 to-teal-500"
+  },
+  {
+    id: 17,
+    title: "Foam Board Printing",
+    category: "specialty",
+    icon: Layers,
+    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop",
+    description: "Lightweight display boards for exhibitions",
+    color: "from-green-500 to-emerald-500"
+  },
+  {
+    id: 18,
+    title: "Digital Printing",
+    category: "all",
+    icon: Cpu,
+    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop",
+    description: "High-quality digital printing for short runs",
+    color: "from-sky-500 to-blue-500"
+  },
+  {
+    id: 19,
+    title: "Offset Printing",
+    category: "all",
+    icon: Printer,
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop",
+    description: "Cost-effective printing for large quantities",
+    color: "from-emerald-500 to-green-500"
+  },
+  {
+    id: 20,
+    title: "Screen Printing",
+    category: "specialty",
+    icon: Grid,
+    image: "https://images.unsplash.com/photo-1578932750294-f5075e85f44a?w=400&h=300&fit=crop",
+    description: "Vibrant printing on various materials",
+    color: "from-rose-500 to-pink-500"
+  },
+  {
+    id: 21,
+    title: "Foil Stamping",
+    category: "specialty",
+    icon: Star,
+    image: "https://images.unsplash.com/photo-1585338109925-a3f44b3f7f2f?w=400&h=300&fit=crop",
+    description: "Luxury metallic finishes for premium products",
+    color: "from-yellow-500 to-amber-500"
+  },
+]
 
   // Filter services based on category and search
   const filteredServices = detailedServices.filter(service => {
@@ -283,9 +242,6 @@ export default function ServicesPage() {
 
   // Stats
   const stats = [
-    { icon: Printer, value: "25,000+", label: "Projects Completed", color: "text-blue-500" },
-    { icon: Users, value: "10,000+", label: "Satisfied Clients", color: "text-green-500" },
-    { icon: Award, value: "50+", label: "Industry Awards", color: "text-yellow-500" },
     { icon: Clock, value: "28", label: "Years Experience", color: "text-red-500" },
     { icon: Shield, value: "100%", label: "Quality Guarantee", color: "text-purple-500" },
     { icon: Truck, value: "24/7", label: "Delivery Support", color: "text-pink-500" },
@@ -349,20 +305,48 @@ export default function ServicesPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-page-primary border-b border-light">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-full bg-current/10 mb-3 ${stat.color}`}>
-                  <stat.icon className="w-7 h-7" />
-                </div>
-                <div className="text-2xl font-bold text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-secondary">{stat.label}</div>
-              </div>
-            ))}
+      <section className="py-20 bg-page-primary">
+  <div className="container mx-auto px-4">
+    {/* Title (optional) */}
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-primary mb-4">Our Achievements</h2>
+      <p className="text-secondary max-w-2xl mx-auto">
+        With decades of experience, we've built a reputation for excellence across the globe.
+      </p>
+    </div>
+
+    {/* Centered stats - exactly as in image */}
+    <div className="flex justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20 max-w-6xl">
+        {/* First Stat */}
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/10 to-cyan-500/10 mb-6">
+            <Clock className="w-10 h-10 text-blue-500" />
           </div>
+          <div className="text-5xl font-bold text-primary mb-3">15+</div>
+          <div className="text-lg text-secondary font-semibold">Countries Served</div>
         </div>
+
+        {/* Second Stat */}
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-500/10 to-emerald-500/10 mb-6">
+            <Shield className="w-10 h-10 text-green-500" />
+          </div>
+          <div className="text-5xl font-bold text-primary mb-3">28</div>
+          <div className="text-lg text-secondary font-semibold">Years Experience</div>
+        </div>
+
+        {/* Third Stat */}
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 mb-6">
+            <Truck className="w-10 h-10 text-purple-500" />
+          </div>
+          <div className="text-5xl font-bold text-primary mb-3">99.8%</div>
+          <div className="text-lg text-secondary font-semibold">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
       </section>
 
       {/* Service Categories Navigation */}
@@ -410,119 +394,99 @@ export default function ServicesPage() {
 
       {/* Services Grid */}
       <section className="py-16 bg-page-primary">
-        <div className="container mx-auto px-4">
-          {/* Results Info */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="text-secondary">
-              Showing <span className="font-semibold text-primary">{filteredServices.length}</span> services
-              {selectedCategory !== "all" && (
-                <span> in <span className="font-semibold text-primary">{serviceCategories.find(c => c.id === selectedCategory)?.name}</span></span>
+  <div className="container mx-auto px-4">
+    {/* Results Info */}
+    <div className="flex justify-between items-center mb-8">
+      <div className="text-secondary">
+        Showing <span className="font-semibold text-primary">{filteredServices.length}</span> services
+        {selectedCategory !== "all" && (
+          <span> in <span className="font-semibold text-primary">{serviceCategories.find(c => c.id === selectedCategory)?.name}</span></span>
+        )}
+      </div>
+      <div className="text-sm text-secondary">
+        Sort by: <select className="bg-transparent text-primary focus:outline-none">
+          <option>Most Popular</option>
+          <option>Alphabetical</option>
+          <option>Category</option>
+        </select>
+      </div>
+    </div>
+
+    {/* Services Grid - Simplified */}
+    {filteredServices.length === 0 ? (
+      <div className="text-center py-20">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-page-tertiary mb-6">
+          <Search className="w-10 h-10 text-secondary" />
+        </div>
+        <h3 className="text-2xl font-bold text-primary mb-3">No services found</h3>
+        <p className="text-secondary mb-6 max-w-md mx-auto">
+          Try adjusting your search criteria or select a different category.
+        </p>
+        <button
+          onClick={() => {
+            setSelectedCategory("all")
+            setSearchQuery("")
+          }}
+          className="px-6 py-2 bg-accent text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
+        >
+          Clear Filters
+        </button>
+      </div>
+    ) : (
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredServices.map((service) => (
+          <div key={service.id} className="group">
+            <div className="bg-page-secondary rounded-2xl p-6 border border-light hover:border-accent transition-all duration-300 hover:shadow-lg h-full flex flex-col">
+              {/* Picture/Icon */}
+              <div className="mb-6 flex justify-center">
+                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <service.icon className="w-10 h-10 text-white" />
+                </div>
+              </div>
+              
+              {/* Name */}
+              <h3 className="text-xl font-bold text-primary mb-4 text-center group-hover:text-accent transition-colors">
+                {service.title}
+              </h3>
+              
+              {/* Description */}
+              <p className="text-secondary text-center flex-grow">
+                {service.description}
+              </p>
+              
+              {/* Optional minimal badge for popular items */}
+              {service.popular && (
+                <div className="mt-4 flex justify-center">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">
+                    <Star className="w-3 h-3" />
+                    Popular Choice
+                  </span>
+                </div>
               )}
-            </div>
-            <div className="text-sm text-secondary">
-              Sort by: <select className="bg-transparent text-primary focus:outline-none">
-                <option>Most Popular</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-                <option>Turnaround Time</option>
-              </select>
+              
+              {/* Simple hover action */}
+              <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="h-1 w-12 bg-accent mx-auto rounded-full"></div>
+                {/* Learn More Button */}
+<div className="text-center mt-3">
+  <button 
+    onClick={() => {
+      setSelectedService(service)
+      setIsModalOpen(true)
+    }}
+    className="text-sm text-accent font-medium hover:underline flex items-center justify-center gap-1 mx-auto"
+  >
+    <span>Learn more</span>
+    <ArrowRight className="w-4 h-4" />
+  </button>
+</div>
+              </div>
             </div>
           </div>
-
-          {/* Services Grid */}
-          {filteredServices.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-page-tertiary mb-6">
-                <Search className="w-10 h-10 text-secondary" />
-              </div>
-              <h3 className="text-2xl font-bold text-primary mb-3">No services found</h3>
-              <p className="text-secondary mb-6 max-w-md mx-auto">
-                Try adjusting your search criteria or select a different category.
-              </p>
-              <button
-                onClick={() => {
-                  setSelectedCategory("all")
-                  setSearchQuery("")
-                }}
-                className="px-6 py-2 bg-accent text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
-              >
-                Clear Filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredServices.map((service) => (
-                <div key={service.id} className="group">
-                  <div className="bg-page-secondary rounded-2xl overflow-hidden border border-light hover:border-accent transition-all duration-300 hover:shadow-xl h-full flex flex-col">
-                    {/* Service Header */}
-                    <div className={`p-6 bg-gradient-to-r ${service.color} relative`}>
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-                            <service.icon className="w-6 h-6 text-white" />
-                          </div>
-                          {service.popular && (
-                            <span className="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-medium">
-                              Popular
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-right">
-                          <div className="text-sm text-white/80 mb-1">Starting from</div>
-                          <div className="text-2xl font-bold text-white">{service.price}</div>
-                        </div>
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
-                      <p className="text-white/90 text-sm">{service.description}</p>
-                    </div>
-
-                    {/* Service Content */}
-                    <div className="p-6 flex-1 flex flex-col">
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-primary mb-3">Key Features:</h4>
-                        <ul className="space-y-2">
-                          {service.features.slice(0, 4).map((feature, index) => (
-                            <li key={index} className="flex items-center gap-2 text-sm text-secondary">
-                              <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Service Details */}
-                      <div className="mt-auto pt-6 border-t border-light">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <div className="text-xs text-secondary mb-1">Turnaround</div>
-                            <div className="font-medium text-primary flex items-center gap-2">
-                              <Clock className="w-4 h-4 text-accent" />
-                              {service.turnaround}
-                            </div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-secondary mb-1">Min. Quantity</div>
-                            <div className="font-medium text-primary">{service.minQuantity}+ units</div>
-                          </div>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="grid grid-cols-2 gap-3 mt-6">
-                          <button className="py-2 bg-accent text-white font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm">
-                            Get Quote
-                          </button>
-                          <button className="py-2 bg-page-primary text-primary font-semibold rounded-lg border border-light hover:border-accent transition-colors text-sm">
-                            Details
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        ))}
+      </div>
+    )}
+  </div>
       </section>
 
       {/* Our Process Section */}
@@ -598,68 +562,11 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Materials & Finishes */}
-      <section className="py-16 bg-page-secondary">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Materials */}
-            <div>
-              <h2 className="text-3xl font-bold text-primary mb-6">Paper & Materials</h2>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { name: "Premium Matte", thickness: "300-400gsm", use: "Business Cards" },
-                  { name: "Gloss Coated", thickness: "170-350gsm", use: "Brochures" },
-                  { name: "Recycled Paper", thickness: "80-250gsm", use: "Eco-friendly" },
-                  { name: "Textured Stock", thickness: "250-400gsm", use: "Invitations" },
-                  { name: "Vinyl", thickness: "3-5mm", use: "Banners & Stickers" },
-                  { name: "Canvas", thickness: "400gsm", use: "Art Prints" },
-                  { name: "Synthetic Paper", thickness: "200-300gsm", use: "Waterproof" },
-                  { name: "Metallic Paper", thickness: "250-350gsm", use: "Premium" },
-                ].map((material, index) => (
-                  <div key={index} className="bg-page-primary rounded-xl p-4 border border-light">
-                    <div className="font-medium text-primary mb-1">{material.name}</div>
-                    <div className="text-sm text-secondary">Thickness: {material.thickness}</div>
-                    <div className="text-xs text-accent mt-1">Ideal for: {material.use}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Finishes */}
-            <div>
-              <h2 className="text-3xl font-bold text-primary mb-6">Finishing Options</h2>
-              <div className="space-y-4">
-                {[
-                  { name: "Spot UV Coating", description: "Glossy coating on specific areas for contrast" },
-                  { name: "Foil Stamping", description: "Metallic foil applied with heat and pressure" },
-                  { name: "Embossing/Debossing", description: "Raised or recessed designs on paper" },
-                  { name: "Die Cutting", description: "Custom shapes and intricate cutouts" },
-                  { name: "Lamination", description: "Plastic film for protection and durability" },
-                  { name: "Perforation", description: "Easy-to-tear sections for coupons and tickets" },
-                  { name: "Numbering", description: "Sequential numbers for tickets and documents" },
-                  { name: "Round Cornering", description: "Rounded corners for professional look" },
-                ].map((finish, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <div className="w-3 h-3 rounded-full bg-accent"></div>
-                    </div>
-                    <div>
-                      <div className="font-medium text-primary mb-1">{finish.name}</div>
-                      <div className="text-sm text-secondary">{finish.description}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why Choose Us */}
       <section className="py-16 bg-page-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-primary mb-4">Why Choose Dream Printers?</h2>
+            <h2 className="text-3xl font-bold text-primary mb-4">Why Choose Awais Printers?</h2>
             <p className="text-secondary max-w-2xl mx-auto">
               We're more than just a printing service - we're your partners in bringing 
               your vision to life with exceptional quality and service.
@@ -701,75 +608,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* File Preparation Guide */}
-      <section className="py-16 bg-page-secondary">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-primary mb-4">File Preparation Guide</h2>
-              <p className="text-secondary">
-                Follow these guidelines to ensure your files are print-ready
-              </p>
-            </div>
-
-            <div className="bg-page-primary rounded-2xl p-8 border border-light">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                    <FileCheck className="w-6 h-6 text-accent" />
-                    Requirements
-                  </h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-secondary">Format: PDF (CMYK color mode)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-secondary">Resolution: 300 DPI minimum</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-secondary">Bleed: 3mm on all sides</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-secondary">Fonts: Embedded or outlined</span>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                    <Download className="w-6 h-6 text-accent" />
-                    Templates & Resources
-                  </h3>
-                  <div className="space-y-3">
-                    {[
-                      { name: "Business Card Template", size: "A4, 3.5x2 inches" },
-                      { name: "Brochure Template", size: "A4, tri-fold" },
-                      { name: "Letterhead Template", size: "A4, with bleed" },
-                      { name: "Banner Template", size: "3x6 feet" },
-                    ].map((template, index) => (
-                      <a
-                        key={index}
-                        href="#"
-                        className="flex items-center justify-between p-3 rounded-lg border border-light hover:border-accent transition-colors group"
-                      >
-                        <div>
-                          <div className="font-medium text-primary group-hover:text-accent">{template.name}</div>
-                          <div className="text-sm text-secondary">{template.size}</div>
-                        </div>
-                        <Download className="w-5 h-5 text-secondary group-hover:text-accent" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-accent to-accent/90">
         <div className="container mx-auto px-4">
@@ -778,7 +616,7 @@ export default function ServicesPage() {
               Ready to Start Your Printing Project?
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Get a free quote today and experience the Dream Printers difference. 
+              Get a free quote today and experience the Awais Printers difference. 
               Our team is ready to help you create exceptional printed materials.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
@@ -855,6 +693,75 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+       {/* SERVICE DETAILS MODAL - ADD THIS */}
+      {isModalOpen && selectedService && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div 
+            className="relative bg-page-primary rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute right-4 top-4 z-10 w-10 h-10 rounded-full bg-page-secondary flex items-center justify-center text-secondary hover:text-primary hover:bg-light transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            
+            {/* Modal Content */}
+            <div className="p-6 md:p-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Left Column - Image */}
+                <div className="space-y-4">
+                  <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-page-secondary to-page-tertiary">
+                    {selectedService.image ? (
+                      <img 
+                        src={selectedService.image} 
+                        alt={selectedService.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className={`w-full h-full flex items-center justify-center ${selectedService.color}`}>
+                        <selectedService.icon className="w-24 h-24 text-white" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Right Column - Details */}
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-3xl font-bold text-primary mb-4">
+                      {selectedService.title}
+                    </h2>
+                    
+                    <div className="prose prose-lg max-w-none">
+                      <p className="text-secondary text-lg leading-relaxed">
+                        {selectedService.description}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                    <button className="flex-1 px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                      <MessageSquare className="w-5 h-5" />
+                      Get Quote
+                    </button>
+                    <button 
+                      onClick={() => setIsModalOpen(false)}
+                      className="flex-1 px-6 py-3 bg-page-secondary text-primary font-semibold rounded-lg border border-light hover:border-accent transition-colors"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* END MODAL */}
     </div>
     <Footer />
     </>

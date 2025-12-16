@@ -16,7 +16,7 @@ export function Hero() {
       button: "Contact Us",
       gradientLight: "linear-gradient(to bottom right, #ffffff, #f8f9fa, #ffffff)",
       gradientDark: "linear-gradient(to bottom right, #121212, #1a1a1a, #121212)",
-      image: "/images/image.png",
+  image: "/images/image-1.jpg",
       imagePosition: "right",
     },
     {
@@ -25,7 +25,7 @@ export function Hero() {
       button: "Know More",
       gradientLight: "linear-gradient(to bottom right, #f8f9fa, #ffffff, #f8f9fa)",
       gradientDark: "linear-gradient(to bottom right, #1a1a1a, #121212, #1a1a1a)",
-      image: "/images/image.png",
+  image: "/images/image-2.jpg",
       imagePosition: "left",
     },
     {
@@ -34,7 +34,7 @@ export function Hero() {
       button: "Explore More",
       gradientLight: "linear-gradient(to bottom right, #f1f3f5, #ffffff, #f1f3f5)",
       gradientDark: "linear-gradient(to bottom right, #2d2d2d, #121212, #2d2d2d)",
-      image: "/images/image.png",
+  image: "/images/image-3.jpg",
       imagePosition: "right",
     },
     {
@@ -43,7 +43,7 @@ export function Hero() {
       button: "For More",
       gradientLight: "linear-gradient(to bottom right, #ffffff, #f1f3f5, #ffffff)",
       gradientDark: "linear-gradient(to bottom right, #121212, #2d2d2d, #121212)",
-      image: "/images/image.png",
+  image: "/images/image-4.jpg",
       imagePosition: "left",
     },
   ]

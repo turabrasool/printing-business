@@ -123,7 +123,7 @@ export function Footer() {
                 </div>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-primary">DreamPrinters</h3>
+                <h3 className="text-2xl font-bold text-primary">AwaisPrinters</h3>
                 <p className="text-sm text-secondary">Where Ideas Become Reality</p>
               </div>
             </div>
@@ -168,15 +168,15 @@ export function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
-                <span className="text-secondary">123 Print Street, Karachi, Pakistan</span>
+                <span className="text-secondary">H # 29/c, Tabassum Street, Sohail Shami Shaheed Road, Ichra, Lahore, Pakistan</span>
               </div>
               <a href="tel:+923224862371" className="flex items-center gap-3 text-secondary hover:text-accent transition-colors">
                 <Phone className="w-5 h-5" />
-                <span>+92 322 4862371</span>
+                <span>+92 322 4432533</span>
               </a>
               <a href="mailto:info@dreamprinters.org" className="flex items-center gap-3 text-secondary hover:text-accent transition-colors">
                 <Mail className="w-5 h-5" />
-                <span>info@dreamprinters.org</span>
+                <span>awais.printers@yahoo.com</span>
               </a>
             </div>
           </div>
@@ -189,8 +189,8 @@ export function Footer() {
             </h3>
             <div className="space-y-3">
               {[
-                { days: 'Mon - Fri', hours: '9:00 AM - 7:00 PM' },
-                { days: 'Saturday', hours: '10:00 AM - 5:00 PM' },
+                { days: 'Mon - Fri', hours: '24/7' },
+                { days: 'Saturday', hours: '10:00 AM - 6:00 PM' },
                 { days: 'Sunday', hours: 'Closed' },
               ].map((schedule, index) => (
                 <div key={index} className="flex justify-between items-center">
@@ -209,7 +209,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2 text-secondary">
               <Heart className="w-4 h-4 text-accent fill-accent" />
-              <span>Made by DreamPrinters © 2025</span>
+              <span>Made by AwaisPrinters © 2025</span>
             </div>
             
             <div className="flex flex-wrap gap-6 text-sm text-secondary">

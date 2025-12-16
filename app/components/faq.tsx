@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "What is printing services?",
     answer:
-      "Dream Printers offers a wide variety of printing and finishing services, including hang tags, leather patches, and care labels.",
+      "Awais Printers offers a wide variety of printing and finishing services, including hang tags, leather patches, and care labels.",
   },
   {
     question: "How can I get my print job once it is finished?",

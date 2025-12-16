@@ -652,7 +652,7 @@ export default function GalleryPage() {
                         </div>
                       </div>
                       <p className="text-secondary italic">
-                        "Working with Dream Printers was a fantastic experience. Their attention to detail 
+                        "Working with Awais Printers was a fantastic experience. Their attention to detail 
                         and commitment to quality resulted in exceptional printed materials that perfectly 
                         represented our brand."
                       </p>

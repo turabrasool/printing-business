@@ -53,8 +53,6 @@ export default function ContactPage() {
       title: "Phone Numbers",
       details: [
         { label: "Primary", value: "+92 322 4862371" },
-        { label: "Secondary", value: "+92 321 8489869" },
-        { label: "Landline", value: "+92 21 34862947" },
       ],
       color: "text-blue-500"
     },
@@ -62,9 +60,7 @@ export default function ContactPage() {
       icon: Mail,
       title: "Email Addresses",
       details: [
-        { label: "General Inquiries", value: "info@dreamprinters.org" },
-        { label: "Sales Department", value: "sales@dreamprinters.org" },
-        { label: "Support Team", value: "support@dreamprinters.org" },
+        { label: "General Inquiries", value: "awais.printers@yahoo.com" },
       ],
       color: "text-red-500"
     },
@@ -72,9 +68,7 @@ export default function ContactPage() {
       icon: MapPin,
       title: "Office Locations",
       details: [
-        { label: "Head Office", value: "Plot 15, Sector 7, Korangi Industrial Area, Karachi" },
-        { label: "Showroom", value: "Shop 24, Tariq Road, Karachi" },
-        { label: "Factory", value: "B-12, SITE Area, Karachi" },
+        { label: "Head Office", value: "H # 29/c, Tabassum Street, Sohail Shami Shaheed Road, Ichra, Lahore, Pakistan" },
       ],
       color: "text-green-500"
     },
@@ -82,8 +76,8 @@ export default function ContactPage() {
       icon: Clock,
       title: "Business Hours",
       details: [
-        { label: "Monday - Friday", value: "9:00 AM - 7:00 PM" },
-        { label: "Saturday", value: "10:00 AM - 5:00 PM" },
+        { label: "Monday - Friday", value: "24/7" },
+        { label: "Saturday", value: "10:00 AM - 6:00 PM" },
         { label: "Sunday", value: "Emergency Services Only" },
       ],
       color: "text-yellow-500"
@@ -420,10 +414,8 @@ export default function ContactPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "Ali Khan", role: "Sales Manager", phone: "+92 322 4862371", email: "ali@dreamprinters.org" },
-              { name: "Sara Ahmed", role: "Design Consultant", phone: "+92 321 8489869", email: "sara@dreamprinters.org" },
-              { name: "Mohammad Asif", role: "Production Head", phone: "+92 333 1234567", email: "asif@dreamprinters.org" },
-              { name: "Fatima Zafar", role: "Customer Support", phone: "+92 300 9876543", email: "fatima@dreamprinters.org" },
+              { name: "Awais Rasool", role: "CEO & Founder" },
+              { name: "Haji Ahmad", role: "Co Founder" },
             ].map((member, index) => (
               <div key={index} className="bg-page-secondary rounded-2xl p-6 border border-light hover:border-accent transition-colors text-center">
                 <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">

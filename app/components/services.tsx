@@ -31,6 +31,10 @@ export function Services() {
       name: "Thermal Stickers",
       image: "/thermal-sticker-printing-machine-equipment.jpg",
     },
+    {
+      name: "Rubber Labels",
+      image: "/thermal-sticker-printing-machine-equipment.jpg",
+    },
   ]
 
   return (

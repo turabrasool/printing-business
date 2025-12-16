@@ -1,16 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { MapPin, Calendar, Users, Award } from "lucide-react"
+import { MapPin, Globe, Clock, Zap } from "lucide-react"
 import { useTheme } from "@/app/theme-provider"
 
 export function AboutUs() {
   const { theme } = useTheme()
 
   const stats = [
-    { icon: Calendar, value: "25+", label: "Years Experience" },
-    { icon: Users, value: "10,000+", label: "Happy Clients" },
-    { icon: Award, value: "100+", label: "Awards Won" },
+    { icon: Globe, value: "15+", label: "Countries Served" },
+    { icon: Clock, value: "28", label: "Years Experience" },
+    { icon: Zap, value: "99.8%", label: "Satisfaction Rate" },
   ]
 
   return (
@@ -22,7 +22,7 @@ export function AboutUs() {
             <div className="relative rounded-2xl overflow-hidden">
               <img
                 src="/dream-printers-office-workspace.jpg"
-                alt="Dream Printers Office"
+                alt="Awais Printers Office"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -47,9 +47,9 @@ export function AboutUs() {
           {/* Right side - Content */}
           <div>
             <p className="text-accent text-sm font-medium mb-4 tracking-wide">ABOUT US</p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">Dream Printers</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">Awais Printers</h2>
             <p className="text-secondary text-lg leading-relaxed mb-8">
-              Founded in February 1996, Dream Printers has been a cornerstone in the textile printing industry for over
+              Founded in February 1999, Awais Printers has been a cornerstone in the textile printing industry for over
               two decades. We specialize in printing high-quality garment accessories, including hang tags, size cards,
               woven labels, care labels, and leather patches.
             </p>
@@ -59,7 +59,7 @@ export function AboutUs() {
                 <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
                   <div className="w-2 h-2 rounded-full bg-accent" />
                 </div>
-                <p className="text-secondary">Over 25 years of printing excellence</p>
+                <p className="text-secondary">Over 26 years of printing excellence</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">

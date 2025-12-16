@@ -37,8 +37,7 @@ export function Header() {
   ]
 
   const phoneNumbers = [
-    { number: "+92 322 4862371", label: "Primary" },
-    { number: "+92 321 8489869", label: "Secondary" },
+    { number: "+92 322 4432533", label: "Primary" },
   ]
 
   // Theme-based styles
@@ -81,7 +80,7 @@ export function Header() {
                 <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-black to-gray-900 shadow-2xl">
                   <div className="relative h-12 w-12">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-white">DP</span>
+                      <span className="text-2xl font-bold text-white">A</span>
                     </div>
                     <div className="absolute -top-1 -right-1">
                       <Sparkles className="h-3 w-3 text-yellow-400 animate-spin-slow" />
@@ -91,7 +90,7 @@ export function Header() {
               </div>
               <div className="flex flex-col">
                 <span className={`text-xl font-bold uppercase leading-tight ${textColor} group-hover:text-red-600 transition-colors`}>
-                  Dream Printers
+                  Awais Printers
                 </span>
                 <span className={`text-[10px] uppercase leading-tight ${textSecondaryColor} group-hover:text-gray-700 transition-colors`}>
                   Where Ideas Become Reality
@@ -206,7 +205,7 @@ export function Header() {
 
               {/* WhatsApp Chat */}
               <a
-                href="https://wa.me/923224862371  "
+                href="https://wa.me/923224432533  "
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-600 to-green-700 text-white text-sm font-semibold hover:shadow-lg hover:shadow-green-500/25 transition-all hover:scale-105 active:scale-95 group relative overflow-hidden"
@@ -224,7 +223,7 @@ export function Header() {
                   </div>
                   <div className="flex flex-col">
                     <span className={`text-xs ${textSecondaryColor}`}>Call Us</span>
-                    <span className={`text-sm font-bold ${textColor}`}>+92 322 4862371</span>
+                    <span className={`text-sm font-bold ${textColor}`}>+92 322 4432533</span>
                   </div>
                   <ChevronDown className={`h-4 w-4 ${textSecondaryColor} group-hover:rotate-180 transition-transform`} />
                 </div>
@@ -354,7 +353,7 @@ export function Header() {
                 ))}
                 
                 <a
-                  href="https://wa.me/923224862371  "
+                  href="https://wa.me/923224432533"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-4 rounded-xl bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold hover:shadow-lg transition-shadow"
@@ -396,14 +395,14 @@ export function Header() {
       {/* Floating Action Buttons */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
         <a
-          href="tel:+923224862371"
+          href="tel:+923224432533"
           className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white shadow-2xl shadow-red-500/30 hover:shadow-red-500/50 transition-all hover:scale-110 active:scale-95"
           aria-label="Call us"
         >
           <Phone className="h-6 w-6" />
         </a>
         <a
-          href="https://wa.me/923224862371  "
+          href="https://wa.me/923224432533"
           target="_blank"
           rel="noopener noreferrer"
           className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-green-600 to-green-700 text-white shadow-2xl shadow-green-500/30 hover:shadow-green-500/50 transition-all hover:scale-110 active:scale-95"
